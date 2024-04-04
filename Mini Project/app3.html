@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Attrition Prediction</title>
+</head>
+<body>
+    <h1>Employee Attrition Prediction</h1>
+    <form action="/predict" method="post">
+        <label for="Age">Age:</label><br>
+        <input type="number" id="Age" name="Age" required><br>
+
+        <label for="BusinessTravel">Business Travel:</label><br>
+        <select id="BusinessTravel" name="BusinessTravel">
+            <option value="Travel_Rarely">Travel Rarely</option>
+            <option value="Travel_Frequently">Travel Frequently</option>
+            <option value="Non-Travel">Non-Travel</option>
+        </select><br>
+
+        <label for="DailyRate">Daily Rate:</label><br>
+        <input type="number" id="DailyRate" name="DailyRate" required><br>
+
+        <label for="Department">Department:</label><br>
+        <select id="Department" name="Department">
+            <option value="Research & Development">Research & Development</option>
+            <option value="Sales">Sales</option>
+            <option value="Human Resources">Human Resources</option>
+        </select><br>
+
+        <label for="DistanceFromHome">Distance From Home:</label><br>
+        <input type="number" id="DistanceFromHome" name="DistanceFromHome" required><br>
+
+        <label for="Education">Education:</label><br>
+        <input type="number" id="Education" name="Education" required><br>
+
+        <label for="EducationField">Education Field:</label><br>
+        <select id="EducationField" name="EducationField">
+            <option value="Life Sciences">Life Sciences</option>
+            <option value="Medical">Medical</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Technical Degree">Technical Degree</option>
+            <option value="Human Resources">Human Resources</option>
+            <option value="Other">Other</option>
+        </select><br>
+
+        <label for="EnvironmentSatisfaction">Environment Satisfaction:</label><br>
+        <input type="number" id="EnvironmentSatisfaction" name="EnvironmentSatisfaction" required><br>
+
+        <label for="Gender">Gender:</label><br>
+        <select id="Gender" name="Gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select><br>
+
+        <label for="HourlyRate">Hourly Rate:</label><br>
+        <input type="number" id="HourlyRate" name="HourlyRate" required><br>
+
+        <label for="JobInvolvement">Job Involvement:</label><br>
+        <input type="number" id="JobInvolvement" name="JobInvolvement" required><br>
+
+        <label for="JobLevel">Job Level:</label><br>
+        <input type="number" id="JobLevel" name="JobLevel" required><br>
+
+        <label for="JobRole">Job Role:</label><br>
+        <select id="JobRole" name="JobRole">
+            <option value="Laboratory Technician">Laboratory Technician</option>
+            <!-- Add other job roles as options -->
+        </select><br>
+
+        <label for="JobSatisfaction">Job Satisfaction:</label><br>
+        <input type="number" id="JobSatisfaction" name="JobSatisfaction" required><br>
+
+        <label for="MaritalStatus">Marital Status:</label><br>
+        <select id="MaritalStatus" name="MaritalStatus">
+            <option value="Married">Married</option>
+            <option value="Single">Single</option>
+            <option value="Divorced">Divorced</option>
+        </select><br>
+
+        <label for="MonthlyIncome">Monthly Income:</label><br>
+        <input type="number" id="MonthlyIncome" name="MonthlyIncome" required><br>
+
+        <label for="NumCompaniesWorked">Number of Companies Worked in:</label><br>
+        <input type="number" id="NumCompaniesWorked" name="NumCompaniesWorked" required><br>
+
+        <label for="OverTime">Over Time:</label><br>
+        <select id="OverTime" name="OverTime">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br>
+
+        <label for="PerformanceRating">Performance Rating:</label><br>
+        <input type="number" id="PerformanceRating" name="PerformanceRating" required><br>
+
+        <label for="RelationshipSatisfaction">Relationship Satisfaction:</label><br>
+        <input type="number" id="RelationshipSatisfaction" name="RelationshipSatisfaction" required><br>
+
+        <label for="StockOptionLevel">Stock Option Level:</label><br>
+        <input type="number" id="StockOptionLevel" name="StockOptionLevel" required><br>
+
+        <label for="TotalWorkingYears">Total Working Years:</label><br>
+        <input type="number" id="TotalWorkingYears" name="TotalWorkingYears" required><br>
+
+        <label for="TrainingTimesLastYear">Training Times Last Year:</label><br>
+        <input type="number" id="TrainingTimesLastYear" name="TrainingTimesLastYear" required><br>
+
+        <label for="WorkLifeBalance">Work Life Balance:</label><br>
+        <input type="number" id="WorkLifeBalance" name="WorkLifeBalance" required><br>
+
+        <label for="YearsAtCompany">Years At Company:</label><br>
+        <input type="number" id="YearsAtCompany" name="YearsAtCompany" required><br>
+
+        <label for="YearsInCurrentRole">Years In Current Role:</label><br>
+        <input type="number" id="YearsInCurrentRole" name="YearsInCurrentRole" required><br>
+
+        <label for="YearsSinceLastPromotion">Years Since Last Promotion:</label><br>
+        <input type="number" id="YearsSinceLastPromotion" name="YearsSinceLastPromotion" required><br>
+
+        <label for="YearsWithCurrManager">Years With Current Manager:</label><br>
+        <input type="number" id="YearsWithCurrManager" name="YearsWithCurrManager" required><br>
+
+        <input type="submit" value="Predict">
+    </form>
+
+    <!-- Prediction Result will be displayed here -->
+    <div id="predictionResult"></div>
+
+    <script>
+        // JavaScript can be used to handle the response and display the prediction result
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const responseData = await fetch('127.0.0.1:5000/predict', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await responseData.text();
+            document.getElementById('predictionResult').innerText = result;
+        });
+    </script>
+</body>
+</html>
